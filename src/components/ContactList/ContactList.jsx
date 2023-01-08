@@ -1,6 +1,6 @@
-import css from './ContactForm.module.css';
+import css from './ContactList.module.css';
 
-export function ContactForm({ contacts, addFilter, filter, deleteContact }) {
+export function ContactList({ contacts, addFilter, filter, deleteContact }) {
   const filteredContacts = contacts.filter(cont =>
     cont.name.toLowerCase().includes(filter.toLowerCase())
   );

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { InputForm } from './InputForm/InputForm';
-import { ContactForm } from './ContactForm/ContactForm';
+import { ContactList } from './ContactList/ContactList';
 
 const startContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -44,7 +44,7 @@ export function App() {
     <section>
       <h1>Phonebook</h1>
       <InputForm addContact={addContact} />
-      <ContactForm
+      <ContactList
         contacts={contacts}
         addFilter={setFilter}
         filter={filter}
