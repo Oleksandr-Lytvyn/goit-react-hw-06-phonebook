@@ -1,8 +1,19 @@
 import css from './ContactList.module.css';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/listSlice';
+import { addFilter } from '../../redux/filterSlice';
 
-export function ContactList({ contacts, addFilter, filter, deleteContact }) {
-  const filteredContacts = contacts.filter(cont =>
-    cont.name.toLowerCase().includes(filter.toLowerCase())
+export function ContactList() {
+  const cont = useSelector(state => state.contacts);
+  const fltr = useSelector(state => state.filter);
+  const dispatch = useDispatch();
+
+  function delCont(submit) {
+    dispatch(deleteContact(submit.target.id));
+  }
+  const filteredContacts = cont.filter(cont =>
+    cont.name.toLowerCase().includes(fltr.toLowerCase())
   );
   return (
     <div className={css.contacts_section}>
@@ -11,7 +22,8 @@ export function ContactList({ contacts, addFilter, filter, deleteContact }) {
         type="text"
         name="filter"
         onInput={event => {
-          addFilter(event.target.value);
+          dispatch(addFilter(event.target.value));
+          // addFilter(event.target.value);
         }}
       />
       <ul className={css.contacts_list}>
@@ -25,7 +37,8 @@ export function ContactList({ contacts, addFilter, filter, deleteContact }) {
               className={css.btn_contact}
               type="button"
               onClick={submit => {
-                deleteContact(submit);
+                delCont(submit);
+                // deleteContact(submit);
               }}
             >
               delete

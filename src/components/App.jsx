@@ -12,44 +12,39 @@ const startContacts = [
 ];
 
 export function App() {
-  const [contacts, setContacts] = useState(() => {
-    if (localStorage.getItem('contacts')) {
-      return JSON.parse(localStorage.getItem('contacts'));
-    }
-    return startContacts;
-  });
-  const [filter, setFilter] = useState('');
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // const [contacts, setContacts] = useState(() => {
+  //   if (localStorage.getItem('contacts')) {
+  //     return JSON.parse(localStorage.getItem('contacts'));
+  //   }
+  //   return startContacts;
+  // });
+  // const [filter, setFilter] = useState('');
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
-  function addContact(newContact, newPhone) {
-    if (contacts.find(cont => cont.name === newContact)) {
-      alert(`${newContact} is already`);
-      return;
-    }
-    setContacts([
-      ...contacts,
-      { id: nanoid(), name: newContact, number: newPhone },
-    ]);
-  }
+  // function addContact(newContact, newPhone) {
+  //   if (contacts.find(cont => cont.name === newContact)) {
+  //     alert(`${newContact} is already`);
+  //     return;
+  //   }
+  //   setContacts([
+  //     ...contacts,
+  //     { id: nanoid(), name: newContact, number: newPhone },
+  //   ]);
+  // }
   function deleteContact(input) {
-    const updatedContacts = contacts.filter(
-      cont => input.target.id !== cont.id
-    );
-    setContacts(updatedContacts);
+    // const updatedContacts = contacts.filter(
+    //   cont => input.target.id !== cont.id
+    // );
+    // setContacts(updatedContacts);
   }
 
   return (
     <section>
       <h1>Phonebook</h1>
-      <InputForm addContact={addContact} />
-      <ContactList
-        contacts={contacts}
-        addFilter={setFilter}
-        filter={filter}
-        deleteContact={deleteContact}
-      />
+      <InputForm />
+      <ContactList />
     </section>
   );
 }

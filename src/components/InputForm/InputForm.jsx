@@ -1,11 +1,22 @@
 import css from './InputForm.module.css';
+// import { addContact } from '../../redux/actions';
+import { addContact } from '../../redux/listSlice';
+import { useDispatch } from 'react-redux';
 
-export function InputForm({ addContact }) {
+export function InputForm() {
+  const dispatch = useDispatch();
+  function onSubmit(event) {
+    const name = event.target.elements.name.value;
+    const number = event.target.elements.number.value;
+    dispatch(addContact(name, number));
+  }
   return (
     <form
       onSubmit={event => {
         event.preventDefault();
         onSubmit(event, addContact);
+        console.log(event.target);
+        event.target.reset();
       }}
     >
       <div className={css.inputs}>
@@ -33,11 +44,4 @@ export function InputForm({ addContact }) {
       <button>add contact</button>
     </form>
   );
-}
-
-function onSubmit(event, addCont) {
-  const contactName = event.target.elements.name.value;
-  const contactPhone = event.target.elements.number.value;
-  //   console.log(event.target.elements.name);
-  return addCont(contactName, contactPhone);
 }
