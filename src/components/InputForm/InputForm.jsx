@@ -1,13 +1,18 @@
 import css from './InputForm.module.css';
-// import { addContact } from '../../redux/actions';
 import { addContact } from '../../redux/listSlice';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export function InputForm() {
   const dispatch = useDispatch();
+  const contactList = useSelector(state => state.contacts.data);
   function onSubmit(event) {
     const name = event.target.elements.name.value;
     const number = event.target.elements.number.value;
+    if (contactList.find(cont => cont.name === name)) {
+      alert(`${name} is already`);
+      return;
+    }
     dispatch(addContact(name, number));
   }
   return (

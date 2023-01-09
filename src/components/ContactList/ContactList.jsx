@@ -8,8 +8,6 @@ export function ContactList() {
   const cont = useSelector(state => state.contacts);
   const fltr = useSelector(state => state.filter);
   const dispatch = useDispatch();
-  // const result = Object.keys(cont);
-  console.log(cont.data);
 
   function delCont(submit) {
     dispatch(deleteContact(submit.target.id));
